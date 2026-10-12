@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import com.topcarservice.coreapi.domain.entities.OrdemServico;
-import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoOutputPort;
+import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoOutputDBPort;
 import com.topcarservice.coreapi.infra.db.mappers.OrdemServicoDBMapper;
 import com.topcarservice.coreapi.infra.db.repositories.OrdemServicoRepository;
 
@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-public class OrdemServicoOutputDB implements OrdemServicoOutputPort {
+public class OrdemServicoOutputDB implements OrdemServicoOutputDBPort {
 	
 	private final OrdemServicoRepository ordemServicoRepository;
 	

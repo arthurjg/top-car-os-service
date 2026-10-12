@@ -11,13 +11,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrdemServicoRetornoDTO{
+public class OrdemServicoRetornoDTO {
 	
-	Long codigo;
-	String status;
-	String cliente;
-	List<OrdemServicoSolicitadoRetornoDTO> servicos;
-	List<OrdemServicoPecaInsumoSolicitadoDTO> pecasInsumos;
-	String dataAbertura;	
+	private Long codigo;
+	private String status;
+	private String cliente;
+	private String veiculo;
+	private List<OrdemServicoSolicitadoRetornoDTO> servicos;
+	private List<OrdemServicoPecaInsumoSolicitadoDTO> pecasInsumos;
+	private String dataAbertura;	
 
 }

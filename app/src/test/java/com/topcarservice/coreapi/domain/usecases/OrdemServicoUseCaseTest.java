@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.topcarservice.coreapi.domain.entities.OrdemServico;
 import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoInputPort;
-import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoOutputPort;
+import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoOutputDBPort;
 
 @ExtendWith(MockitoExtension.class)
 class OrdemServicoUseCaseTest {
@@ -27,7 +27,7 @@ class OrdemServicoUseCaseTest {
 	OrdemServicoInputPort inputPort;
 	
 	@Mock
-	OrdemServicoOutputPort outputPort;
+	OrdemServicoOutputDBPort outputPort;
 
 	@Test
 	void testCadastrar() {

@@ -13,7 +13,8 @@ import com.topcarservice.coreapi.domain.usecases.VeiculoUseCase;
 import com.topcarservice.coreapi.domain.usecases.ports.ClienteInputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.ClienteOutputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoInputPort;
-import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoOutputPort;
+import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoOutputDBPort;
+import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoOutputEventPort;
 import com.topcarservice.coreapi.domain.usecases.ports.PecaInsumoInputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.PecaInsumoOutputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.PecaInsumoSolicitadoInputPort;
@@ -34,8 +35,9 @@ public class UseCasesConfig {
 	}
 	
 	@Bean
-	OrdemServicoUseCase ordemServicoUseCase(OrdemServicoInputPort inputPort, OrdemServicoOutputPort outputPort) {
-		return new OrdemServicoUseCase(inputPort, outputPort);
+	OrdemServicoUseCase ordemServicoUseCase(OrdemServicoInputPort inputPort, OrdemServicoOutputDBPort outputPort, 
+			OrdemServicoOutputEventPort outputEventPort, ServicoSolicitadoUseCase servicoSolicitadoUseCase, PecaInsumoSolicitadoUseCase pecaInsumoSolicitadoUseCase) {
+		return new OrdemServicoUseCase(inputPort, outputPort, outputEventPort, servicoSolicitadoUseCase, pecaInsumoSolicitadoUseCase);
 	}
 	
 	@Bean

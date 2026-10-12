@@ -24,6 +24,12 @@ public class Veiculo {
 		this.marca = marca;
 		this.modelo = modelo;
 		this.ano = ano;
+	}	
+
+	@Override
+	public String toString() {
+		return "Veiculo [codigo=" + codigo + ", placa=" + placa + ", marca=" + marca + ", modelo=" + modelo + ", ano="
+				+ ano + "]";
 	}
 
 	public Long getCodigo() {

@@ -1,5 +1,7 @@
 package com.topcarservice.coreapi.adapters.presenters;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.topcarservice.coreapi.adapters.controllers.dto.PecaInsumoDTO;
+import com.topcarservice.coreapi.adapters.controllers.dto.PecaInsumoRetornoDTO;
 import com.topcarservice.coreapi.adapters.controllers.mappers.PecaInsumoMapper;
 import com.topcarservice.coreapi.domain.entities.PecaInsumo;
 import com.topcarservice.coreapi.domain.usecases.PecaInsumoUseCase;
@@ -36,6 +39,16 @@ public class PecaInsumoPresenter {
 		} catch (IllegalArgumentException e) {			
 			return ResponseEntity.notFound().build();
 		}	
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<PecaInsumoRetornoDTO>> listar() {	
+		
+		List<PecaInsumo> pecasInsumos = pecaInsumoUseCase.listar();		
+		
+		List<PecaInsumoRetornoDTO> ordemsServicoRetorno  = pecaInsumoMapper.map(pecasInsumos);
+		
+		return ResponseEntity.ok().body(ordemsServicoRetorno);
 	}
 
 }

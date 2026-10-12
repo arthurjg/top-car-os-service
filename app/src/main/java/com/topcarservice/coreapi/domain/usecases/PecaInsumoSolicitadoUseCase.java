@@ -1,5 +1,6 @@
 package com.topcarservice.coreapi.domain.usecases;
 
+import com.topcarservice.coreapi.domain.entities.OrdemServico;
 import com.topcarservice.coreapi.domain.entities.PecaInsumoSolicitado;
 import com.topcarservice.coreapi.domain.usecases.ports.PecaInsumoSolicitadoInputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.PecaInsumoSolicitadoOutputPort;
@@ -15,8 +16,8 @@ public class PecaInsumoSolicitadoUseCase {
 		this.outputPort = outputPort;
 	}
 
-	public void cadastrar(PecaInsumoSolicitado pecaInsumoSolicitado) {
-		inputPort.save(pecaInsumoSolicitado);		
+	public void cadastrar(PecaInsumoSolicitado pecaInsumoSolicitado, OrdemServico ordemServico) {
+		inputPort.save(pecaInsumoSolicitado, ordemServico);		
 	}
 
 	public PecaInsumoSolicitado carregar(Long codigo) {

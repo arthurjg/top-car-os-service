@@ -12,9 +12,11 @@ public class PecaInsumoSolicitado {
 	
 	private Integer quantidade;
 	
-	private BigDecimal valorUnitario;	
+	private BigDecimal valorUnitario;		
 		
 	private PecaInsumo pecaInsumo;
+	
+	private BigDecimal valorTotal;	
 	
 	@Deprecated
 	public PecaInsumoSolicitado() {
@@ -28,6 +30,18 @@ public class PecaInsumoSolicitado {
 		this.modelo = pecaInsumo.getModelo();
 		this.valorUnitario = pecaInsumo.getValorUnitario();
 		this.quantidade = quantidade;
+		this.valorTotal = calcularValorTotal();
+	}
+
+	public BigDecimal getValorTotal() {
+		if (valorTotal == null) {
+			valorTotal = calcularValorTotal();
+		}
+		return valorTotal;
+	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 
 	public Long getCodigo() {
@@ -77,5 +91,9 @@ public class PecaInsumoSolicitado {
 	public void setPecaInsumo(PecaInsumo pecaInsumo) {
 		this.pecaInsumo = pecaInsumo;
 	}	
+	
+	private BigDecimal calcularValorTotal() {
+		return getValorUnitario().multiply(BigDecimal.valueOf(getQuantidade()));
+	}
 
 }

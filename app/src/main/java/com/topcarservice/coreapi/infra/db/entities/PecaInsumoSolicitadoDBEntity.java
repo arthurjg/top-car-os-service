@@ -39,5 +39,8 @@ public class PecaInsumoSolicitadoDBEntity {
 	@ManyToOne
 	@JoinColumn(name = "peca_insumo_codigo")	
 	private PecaInsumoDBEntity pecaInsumo;
+	
+	@ManyToOne
+	private OrdemServicoDBEntity ordemServico;
 
 }

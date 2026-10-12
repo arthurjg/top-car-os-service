@@ -1,5 +1,6 @@
 package com.topcarservice.coreapi.domain.usecases;
 
+import com.topcarservice.coreapi.domain.entities.OrdemServico;
 import com.topcarservice.coreapi.domain.entities.ServicoSolicitado;
 import com.topcarservice.coreapi.domain.usecases.ports.ServicoSolicitadoInputPort;
 import com.topcarservice.coreapi.domain.usecases.ports.ServicoSolicitadoOutputPort;
@@ -15,8 +16,8 @@ public class ServicoSolicitadoUseCase {
 		this.outputPort = outputPort;
 	}
 
-	public void cadastrar(ServicoSolicitado servicoSolicitado) {
-		inputPort.save(servicoSolicitado);		
+	public void cadastrar(ServicoSolicitado servicoSolicitado, OrdemServico ordemServico) {
+		inputPort.save(servicoSolicitado, ordemServico);		
 	}
 
 	public ServicoSolicitado carregar(Long codigo) {

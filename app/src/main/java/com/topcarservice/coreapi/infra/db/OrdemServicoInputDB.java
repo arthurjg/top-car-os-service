@@ -15,12 +15,13 @@ public class OrdemServicoInputDB implements OrdemServicoInputPort {
 	
 	private final OrdemServicoRepository ordemServicoRepository;
 	
-	private final OrdemServicoDBMapper ordemServicoDBMapper;
+	private final OrdemServicoDBMapper ordemServicoDBMapper;	
 
 	@Override
-	public OrdemServico save(OrdemServico ordemServico) {
+	public OrdemServico save(OrdemServico ordemServico) {		
 		
-		var ordemServicoDB = ordemServicoDBMapper.map(ordemServico);		
+		var ordemServicoDB = ordemServicoDBMapper.map(ordemServico);			
+		
 		var ordemServicoDBSaved = ordemServicoRepository.save(ordemServicoDB);
 		
 		return ordemServicoDBMapper.mapTo(ordemServicoDBSaved);

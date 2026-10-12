@@ -33,5 +33,8 @@ public class ServicoSolicitadoDBEntity {
 	
 	@ManyToOne
 	private ServicoDBEntity servico;
+	
+	@ManyToOne
+	private OrdemServicoDBEntity ordemServico;
 
 }

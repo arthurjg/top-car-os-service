@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-public class ServicoSolicitadoOutputDB2 implements ServicoSolicitadoOutputPort {
+public class ServicoSolicitadoOutputDB implements ServicoSolicitadoOutputPort {
 	
 	private final ServicoSolicitadoRepository servicoSolicitadoRepository;
 	

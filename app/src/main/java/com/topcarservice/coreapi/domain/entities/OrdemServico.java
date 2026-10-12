@@ -35,14 +35,13 @@ public class OrdemServico {
 	}
 
 	@Deprecated
-	public OrdemServico(Long codigo, StatusOrdemServico status, Cliente cliente,
+	public OrdemServico(Long codigo, StatusOrdemServico status, Cliente cliente, Veiculo veiculo,
 			List<ServicoSolicitado> servicos, List<PecaInsumoSolicitado> pecasInsumos, LocalDateTime dataAbertura) {
-		super();
+		this(cliente, veiculo);
 		this.codigo = codigo;
-		this.status = status;
-		this.cliente = cliente;
-		this.servicos = servicos;
-		this.pecasInsumos = pecasInsumos;
+		this.status = status;		
+		this.servicos.addAll(servicos);
+		this.pecasInsumos.addAll(pecasInsumos);
 		this.dataAbertura = dataAbertura;
 	}	
 
@@ -72,19 +71,11 @@ public class OrdemServico {
 
 	public List<ServicoSolicitado> getServicos() {
 		return servicos;
-	}
-
-	public void setServicos(List<ServicoSolicitado> servicos) {
-		this.servicos = servicos;
-	}
+	}	
 
 	public List<PecaInsumoSolicitado> getPecasInsumos() {
 		return pecasInsumos;
-	}
-
-	public void setPecasInsumos(List<PecaInsumoSolicitado> pecasInsumos) {
-		this.pecasInsumos = pecasInsumos;
-	}
+	}	
 
 	public LocalDateTime getDataAbertura() {
 		return dataAbertura;
@@ -96,6 +87,32 @@ public class OrdemServico {
 
 	public Veiculo getVeiculo() {
 		return veiculo;
+	}
+	
+	public PecaInsumoSolicitado incluirPecasInsumos(PecaInsumo pecasInsumo, Integer quantidade) {
+		if(this.pecasInsumos == null) {
+			this.pecasInsumos = new ArrayList<>();
+		}
+		validarInclusaoItemOuServico();
+		var pecaInsumoSolicitado = new PecaInsumoSolicitado(pecasInsumo, quantidade);
+		this.pecasInsumos.add(new PecaInsumoSolicitado(pecasInsumo, quantidade));
+		return pecaInsumoSolicitado;
+	}
+
+	public ServicoSolicitado incluirServico(Servico servico) {
+		if(this.servicos == null) {
+			this.servicos = new ArrayList<>();
+		}
+		validarInclusaoItemOuServico();
+		var servicoSolicitado = new ServicoSolicitado(servico);
+		this.servicos.add(servicoSolicitado);		
+		return servicoSolicitado;
 	}	
+	
+	private void validarInclusaoItemOuServico() {
+		if( !(status == StatusOrdemServico.RECEBIDA || status == StatusOrdemServico.EM_DIAGNOSTICO) ) {
+			throw new IllegalStateException("Não é possível incluir peças/insumos em uma ordem de serviço apos o diagnostico.");
+		}
+	}
 
 }

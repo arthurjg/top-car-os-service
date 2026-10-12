@@ -1,5 +1,7 @@
 package com.topcarservice.coreapi.domain.usecases;
 
+import java.util.List;
+
 import com.topcarservice.coreapi.domain.entities. PecaInsumo;
 import com.topcarservice.coreapi.domain.usecases.ports. PecaInsumoInputPort;
 import com.topcarservice.coreapi.domain.usecases.ports. PecaInsumoOutputPort;
@@ -27,6 +29,10 @@ public class PecaInsumoUseCase {
 
 	public void excluir( PecaInsumo  pecaInsumo) {
 		inputPort.delete( pecaInsumo);		
+	}
+
+	public List<PecaInsumo> listar() {		
+		return outputPort.findAll();
 	}
 
 }

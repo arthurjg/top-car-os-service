@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.topcarservice.coreapi.domain.entities.OrdemServico;
 
-public interface OrdemServicoOutputPort {
+public interface OrdemServicoOutputDBPort {
 
 	Optional<OrdemServico> findById(Long codigo);
 

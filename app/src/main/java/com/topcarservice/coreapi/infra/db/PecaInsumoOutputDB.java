@@ -1,5 +1,6 @@
 package com.topcarservice.coreapi.infra.db;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
@@ -22,9 +23,21 @@ public class PecaInsumoOutputDB implements PecaInsumoOutputPort {
 	@Override
 	public Optional<PecaInsumo> findById(Long codigo) {		
 		
-		return pecaInsumoRepository.findById(codigo)
+		Optional<PecaInsumo> pecaInsumo = pecaInsumoRepository.findById(codigo)
 				.map(pecaInsumoDBMapper::mapTo);
+		
+		return pecaInsumo;
 	}
+
+	@Override
+	public List<PecaInsumo> findAll() {		
+		return pecaInsumoRepository.findAll()
+				.stream()
+				.map(pecaInsumoDBMapper::mapTo)
+				.toList();
+	}
+	
+	
 
 }
 

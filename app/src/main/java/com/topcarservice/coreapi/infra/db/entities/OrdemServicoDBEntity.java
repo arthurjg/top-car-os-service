@@ -3,6 +3,7 @@ package com.topcarservice.coreapi.infra.db.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,10 +43,10 @@ public class OrdemServicoDBEntity {
 	@JoinColumn(name = "veiculo_codigo")	
 	private VeiculoDBEntity veiculo;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "ordemServico")
 	private List<ServicoSolicitadoDBEntity> servicos;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "ordemServico")
 	private List<PecaInsumoSolicitadoDBEntity> pecasInsumos;
 	
 	private LocalDateTime dataAbertura;

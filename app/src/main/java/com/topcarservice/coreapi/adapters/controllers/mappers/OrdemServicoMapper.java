@@ -27,27 +27,25 @@ public class OrdemServicoMapper {
 
 	public OrdemServico map(OrdemServicoDTO ordemServicoDto) {		
 		return objectMapper.map(ordemServicoDto, OrdemServico.class);
-	}
+	}	
 	
-	//TODO
 	public OrdemServicoRetornoDTO map(OrdemServico ordemServico) {			
 		
-		List<OrdemServicoSolicitadoRetornoDTO> servicosSolicitados = null;
-				/*ordemServico.getServicos()
+		List<OrdemServicoSolicitadoRetornoDTO> servicosSolicitados = ordemServico.getServicos()
 				.stream()
 				.map(servicoSolicitadoEntity -> servicoSolicitadoMapper.mapTo(servicoSolicitadoEntity))
-				.toList();*/
+				.toList();
 		
-		List<OrdemServicoPecaInsumoSolicitadoDTO> pecasInsumosSolicitados = null;
-				/*ordemServico.getPecasInsumos()
+		List<OrdemServicoPecaInsumoSolicitadoDTO> pecasInsumosSolicitados = ordemServico.getPecasInsumos()
 				.stream()
 				.map(pecaInsumoSolicitado -> pecaInsumoSolicitadoMapper.mapTo(pecaInsumoSolicitado))
-				.toList(); TODO TEST ALTERAR */
+				.toList(); 
 		
 		return OrdemServicoRetornoDTO.builder()
 				.codigo(ordemServico.getCodigo())
 				.status(ordemServico.getStatus().name())
 				.cliente(ordemServico.getCliente().getNome())
+				.veiculo(ordemServico.getVeiculo().toString())
 				.dataAbertura(DateTimeUtil.formatarDataHora(ordemServico.getDataAbertura()))
 				.servicos(servicosSolicitados)
 				.pecasInsumos(pecasInsumosSolicitados)

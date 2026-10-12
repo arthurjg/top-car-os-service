@@ -1,5 +1,7 @@
 package com.topcarservice.coreapi.domain.entities;
 
+import java.util.stream.Stream;
+
 public enum StatusOrdemServico {	
 	
 	RECEBIDA(1, "RECEBIDA"),
@@ -24,5 +26,21 @@ public enum StatusOrdemServico {
 	public String getDescricao() {
 		return descricao;
 	}	
+	
+	public static StatusOrdemServico fromDescricao(String descricao) {
+		
+		return Stream.of(StatusOrdemServico.values())		
+			.filter(status -> status.getDescricao().equalsIgnoreCase(descricao))
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException("Descrição de status inválida: " + descricao));		
+	}
+	
+	public static StatusOrdemServico fromCodigo(int codigo) {
+		
+		return Stream.of(StatusOrdemServico.values())		
+			.filter(status -> status.getCodigo() == codigo)
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException("Código de status inválido: " + codigo));		
+	}
 
 }
