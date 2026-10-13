@@ -26,6 +26,7 @@ public class OrdemServicoDBMapper {
 
 	public OrdemServicoDBEntity map(OrdemServico ordemServico) {		
 		return OrdemServicoDBEntity.builder()
+				.codigo(ordemServico.getCodigo())
 				.status(ordemServico.getStatus().getCodigo())
 				.dataAbertura(ordemServico.getDataAbertura())
 				.cliente(objectMapper.map(ordemServico.getCliente(), ClienteDBEntity.class))
