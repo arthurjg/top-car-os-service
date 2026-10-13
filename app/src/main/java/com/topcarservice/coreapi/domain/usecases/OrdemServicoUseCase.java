@@ -39,6 +39,12 @@ public class OrdemServicoUseCase {
 		return outputDBPort.findById(codigo)
 				.orElseThrow(() -> new IllegalArgumentException("OrdemServico não encontrada"));
 	}
+	
+	public OrdemServico buscar(Long codigo) {
+		
+		return outputDBPort.findAggregateById(codigo)
+				.orElseThrow(() -> new IllegalArgumentException("OrdemServico não encontrada"));
+	}
 
 	public void excluir(OrdemServico ordemServico) {
 		inputPort.delete(ordemServico);		
@@ -51,7 +57,12 @@ public class OrdemServicoUseCase {
 	public void atualizar(OrdemServico ordemServico, String status) {		
 		
 		ordemServico.setStatus(StatusOrdemServico.fromDescricao(status));
-		cadastrar(ordemServico);
+		cadastrar(ordemServico);		
+	}
+	
+	public void finalizarDiagnostico(OrdemServico ordemServico) {		
+		
+		ordemServico.ePossivelFinalizarDiagnostico();		
 		
 		outputEventPort.sendOSAtualizadaEvent(ordemServico);
 	}

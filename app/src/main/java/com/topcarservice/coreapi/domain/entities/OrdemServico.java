@@ -44,6 +44,15 @@ public class OrdemServico {
 		this.pecasInsumos.addAll(pecasInsumos);
 		this.dataAbertura = dataAbertura;
 	}	
+	
+	@Deprecated
+	public OrdemServico(Long codigo, StatusOrdemServico status, Cliente cliente, Veiculo veiculo,
+			LocalDateTime dataAbertura) {
+		this(cliente, veiculo);
+		this.codigo = codigo;
+		this.status = status;		
+		this.dataAbertura = dataAbertura;
+	}	
 
 	public Long getCodigo() {
 		return codigo;
@@ -112,6 +121,13 @@ public class OrdemServico {
 	private void validarInclusaoItemOuServico() {
 		if( !(status == StatusOrdemServico.RECEBIDA || status == StatusOrdemServico.EM_DIAGNOSTICO) ) {
 			throw new IllegalStateException("Não é possível incluir peças/insumos em uma ordem de serviço apos o diagnostico.");
+		}
+	}
+	
+	public void ePossivelFinalizarDiagnostico() {
+		if( status != StatusOrdemServico.EM_DIAGNOSTICO || getServicos().isEmpty() || getPecasInsumos().isEmpty() ) {
+			throw new IllegalStateException("Não é possível finalizar o diagnostico. "
+					+ "Status da ordem de serviço deve ser EM_DIAGNOSTICO e deve conter pelo menos um serviço e uma peça/insumo.");
 		}
 	}
 

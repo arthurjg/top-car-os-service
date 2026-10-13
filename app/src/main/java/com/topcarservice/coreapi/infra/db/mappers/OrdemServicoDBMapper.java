@@ -40,12 +40,22 @@ public class OrdemServicoDBMapper {
 				ordemServicoDBEntity.getCodigo(),
 				StatusOrdemServico.fromCodigo(ordemServicoDBEntity.getStatus()),
 				objectMapper.map(ordemServicoDBEntity.getCliente(), Cliente.class),
+				objectMapper.map(ordemServicoDBEntity.getVeiculo(), Veiculo.class),				
+				ordemServicoDBEntity.getDataAbertura()
+			);		
+	}
+	
+	public OrdemServico mapToAggregate(OrdemServicoDBEntity ordemServicoDBEntity) {			
+		
+		return new OrdemServico(
+				ordemServicoDBEntity.getCodigo(),
+				StatusOrdemServico.fromCodigo(ordemServicoDBEntity.getStatus()),
+				objectMapper.map(ordemServicoDBEntity.getCliente(), Cliente.class),
 				objectMapper.map(ordemServicoDBEntity.getVeiculo(), Veiculo.class),
 				servicoSolicitadoDBMapper.mapTo(ordemServicoDBEntity.getServicos()),
 				pecaInsumoSolicitadoDBMapper.mapTo(ordemServicoDBEntity.getPecasInsumos()),
 				ordemServicoDBEntity.getDataAbertura()
-			);
-		
+			);		
 	}
 
 }

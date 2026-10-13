@@ -8,6 +8,8 @@ import com.topcarservice.coreapi.domain.entities.OrdemServico;
 public interface OrdemServicoOutputDBPort {
 
 	Optional<OrdemServico> findById(Long codigo);
+	
+	Optional<OrdemServico> findAggregateById(Long codigo);
 
 	List<OrdemServico> findAll();
 

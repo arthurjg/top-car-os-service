@@ -136,6 +136,28 @@ public class OrdemServicoController {
 		}	
 	}	
 	
+	@PutMapping("/{id}/diagnostico")
+	public ResponseEntity<OrdemServicoRetornoDTO> finalizarDiagnostico(@PathVariable("id") Long codigo) {			
+		
+		try {
+			OrdemServico ordemServico = ordemServicoUseCase.carregar(codigo);	
+			
+			ordemServicoUseCase.finalizarDiagnostico(ordemServico); 
+			
+			OrdemServicoRetornoDTO ordemservicoResponse = ordemServicoMapper.map(ordemServico);
+			
+			log.info("Ordem de serviço atualizada com sucesso: {}", ordemServico.getCodigo());
+			
+			return ResponseEntity.ok().body(ordemservicoResponse);
+		} catch (IllegalArgumentException e) {			
+			log.error("Erro ao finalizar diagnostico da ordem de serviço: {}", e.getMessage());
+			return ResponseEntity.notFound().build();
+		} catch (IllegalStateException e) {			
+			log.error("Erro ao finalizar diagnostico da ordem de serviço: {}", e.getMessage());
+			return ResponseEntity.badRequest().build();
+		}	
+	}	
+	
 	@PutMapping("/{id}/aprovacao")
 	public ResponseEntity<OrdemServicoRetornoDTO> enviarAprovacao(@PathVariable("id") Long codigo) {			
 		
