@@ -20,6 +20,7 @@ import com.topcarservice.coreapi.domain.entities.Cliente;
 import com.topcarservice.coreapi.domain.entities.OrdemServico;
 import com.topcarservice.coreapi.domain.entities.PecaInsumo;
 import com.topcarservice.coreapi.domain.entities.Servico;
+import com.topcarservice.coreapi.domain.entities.StatusOrdemServico;
 import com.topcarservice.coreapi.domain.entities.Veiculo;
 import com.topcarservice.coreapi.domain.usecases.ClienteUseCase;
 import com.topcarservice.coreapi.domain.usecases.OrdemServicoUseCase;
@@ -159,19 +160,24 @@ public class OrdemServicoController {
 	}	
 	
 	@PutMapping("/{id}/aprovacao")
-	public ResponseEntity<OrdemServicoRetornoDTO> enviarAprovacao(@PathVariable("id") Long codigo) {			
+	public ResponseEntity<OrdemServicoRetornoDTO> aprovacao(@PathVariable("id") Long codigo) {			
 		
 		try {
 			OrdemServico ordemServico = ordemServicoUseCase.carregar(codigo);	
 			
-			//ordemServicoUseCase.enviarAprovacao(ordemServico); TODO TEST ALTERAR
+			ordemServicoUseCase.atualizar(ordemServico, StatusOrdemServico.EM_EXECUCAO.getDescricao()); 
 			
 			OrdemServicoRetornoDTO ordemservicoResponse = ordemServicoMapper.map(ordemServico);
 			
-			return ResponseEntity.ok().body(ordemservicoResponse);
-		} catch (IllegalArgumentException e) {			
+			log.info("Ordem de serviço aprovada com sucesso: {}", ordemServico.getCodigo());
+			
+			return ResponseEntity.ok().body(ordemservicoResponse);	
+			
+		} catch (IllegalArgumentException e) {	
+			log.error("Erro ao aprovar a ordem de serviço: {}", e.getMessage());
 			return ResponseEntity.notFound().build();
 		} catch (IllegalStateException e) {			
+			log.error("Erro ao aprovar a ordem de serviço: {}", e.getMessage());
 			return ResponseEntity.badRequest().build();
 		}	
 	}	

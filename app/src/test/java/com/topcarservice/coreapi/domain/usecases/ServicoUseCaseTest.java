@@ -32,7 +32,7 @@ class ServicoUseCaseTest {
 
 	@Test
 	void testCadastrar() {
-		Servico servico = new Servico(1L, "troca pneus", new BigDecimal(150.0));
+		Servico servico = new Servico(1L, "troca pneus", new BigDecimal(150.0), 60L);
 		useCase.cadastrar(servico);
 		
 		verify(inputPort).save(servico);
@@ -43,7 +43,7 @@ class ServicoUseCaseTest {
 		
 		long codigo = 1L;
 		
-		Servico servico = new Servico(codigo, "troca pneus", new BigDecimal(150.0));
+		Servico servico = new Servico(codigo, "troca pneus", new BigDecimal(150.0), 60L);
 		
 		when(outputPort.findById(codigo)).thenReturn(Optional.of(servico));
 		

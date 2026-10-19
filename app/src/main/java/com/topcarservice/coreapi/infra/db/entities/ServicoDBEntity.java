@@ -32,6 +32,8 @@ public class ServicoDBEntity {
 	
 	private BigDecimal valorMaoDeObra;
 	
+	private Long tempoExecucaoPrevisto;
+	
 	@OneToMany(mappedBy = "servico")
 	private List<PecaInsumoDBEntity> pecasInsumos;
 

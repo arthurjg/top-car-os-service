@@ -12,6 +12,8 @@ public class ServicoSolicitado {
 	
 	private Servico servico;
 	
+	private long tempoExecucaoPrevisto;
+	
 	@Deprecated
 	public ServicoSolicitado() {
 		super();		
@@ -22,6 +24,7 @@ public class ServicoSolicitado {
 		this.servico = servico;
 		this.nome = servico.getNome();
 		this.valorMaoDeObra = servico.getValorMaoDeObra();
+		this.setTempoExecucaoPrevisto(servico.getTempoExecucaoPrevisto());
 	}
 
 	public Long getCodigo() {
@@ -54,6 +57,14 @@ public class ServicoSolicitado {
 
 	public void setServico(Servico servico) {
 		this.servico = servico;
+	}
+
+	public long getTempoExecucaoPrevisto() {
+		return tempoExecucaoPrevisto;
+	}
+
+	public void setTempoExecucaoPrevisto(long tempoExecucaoPrevisto) {
+		this.tempoExecucaoPrevisto = tempoExecucaoPrevisto;
 	}	
 
 }

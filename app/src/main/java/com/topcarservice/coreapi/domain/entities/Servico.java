@@ -13,16 +13,19 @@ public class Servico {
 	
 	private List<PecaInsumo> pecasInsumos;
 	
+	private long tempoExecucaoPrevisto;
+	
 	@Deprecated
 	public Servico() {
 		super();		
 	}
 	
-	public Servico(Long codigo, String nome, BigDecimal valorMaoDeObra) {
+	public Servico(Long codigo, String nome, BigDecimal valorMaoDeObra, long tempoExecucaoPrevisto) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
 		this.valorMaoDeObra = valorMaoDeObra;		
+		this.setTempoExecucaoPrevisto(tempoExecucaoPrevisto);
 	}
 
 	public Long getCodigo() {
@@ -55,6 +58,14 @@ public class Servico {
 
 	public void setPecasInsumos(List<PecaInsumo> pecasInsumos) {
 		this.pecasInsumos = pecasInsumos;
+	}
+
+	public long getTempoExecucaoPrevisto() {
+		return tempoExecucaoPrevisto;
+	}
+
+	public void setTempoExecucaoPrevisto(long tempoExecucaoPrevisto) {
+		this.tempoExecucaoPrevisto = tempoExecucaoPrevisto;
 	}	
 
 }

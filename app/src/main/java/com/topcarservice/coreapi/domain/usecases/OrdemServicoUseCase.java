@@ -58,6 +58,10 @@ public class OrdemServicoUseCase {
 		
 		ordemServico.setStatus(StatusOrdemServico.fromDescricao(status));
 		cadastrar(ordemServico);		
+		
+		if(ordemServico.getStatus() == StatusOrdemServico.EM_EXECUCAO) {
+			outputEventPort.sendOSAtualizadaEvent(ordemServico);
+		}
 	}
 	
 	public void finalizarDiagnostico(OrdemServico ordemServico) {		

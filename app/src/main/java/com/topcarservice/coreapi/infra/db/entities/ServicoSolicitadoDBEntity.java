@@ -29,7 +29,9 @@ public class ServicoSolicitadoDBEntity {
 	
 	private String nome;
 	
-	private BigDecimal valorMaoDeObra;		
+	private BigDecimal valorMaoDeObra;	
+	
+	private Long tempoExecucaoPrevisto;
 	
 	@ManyToOne
 	private ServicoDBEntity servico;

@@ -18,5 +18,7 @@ public class ServicoDTO {
 	private String nome;
 	
 	private BigDecimal valorMaoDeObra;
+	
+	private long tempoExecucaoPrevisto;
 
 }
