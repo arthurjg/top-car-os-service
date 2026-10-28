@@ -1,4 +1,4 @@
-package com.topcarservice.coreapi.adapter.gateway;
+package com.topcarservice.coreapi.adapters.gateway;
 
 import org.springframework.stereotype.Component;
 

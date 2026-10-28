@@ -76,9 +76,9 @@ public class OrdemServicoUseCase {
 		
 		var pecaInsumoSolicitado = ordemServico.incluirPecasInsumos(pecaInsumo, quantidade);
 		
-		pecaInsumoSolicitadoUseCase.cadastrar(pecaInsumoSolicitado, ordemServico);		
+		pecaInsumoSolicitadoUseCase.cadastrar(pecaInsumoSolicitado, ordemServico);			
 		
-		return ordemServico;
+		return verificaStatus(ordemServico);
 	}
 
 	public OrdemServico incluirServico(OrdemServico ordemServico, Servico servico) {
@@ -86,6 +86,15 @@ public class OrdemServicoUseCase {
 		var servicoSolicitado = ordemServico.incluirServico(servico);
 		
 		servicoSolicitadoUseCase.cadastrar(servicoSolicitado, ordemServico);		
+		
+		return verificaStatus(ordemServico);
+	}
+	
+	private OrdemServico verificaStatus(OrdemServico ordemServico) {
+		
+		if(ordemServico.getStatus() != StatusOrdemServico.EM_DIAGNOSTICO) {
+			atualizar(ordemServico, StatusOrdemServico.EM_DIAGNOSTICO.getDescricao());
+		}
 		
 		return ordemServico;
 	}
