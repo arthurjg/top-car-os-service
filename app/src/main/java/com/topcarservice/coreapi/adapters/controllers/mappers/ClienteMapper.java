@@ -15,7 +15,7 @@ public class ClienteMapper {
 	private ModelMapper objectMapper;
 
 	public Cliente map(ClienteDTO clienteDto) {		
-		if(clienteDto.getCpf() != null) {
+		if(clienteDto.getCpf() != null && !clienteDto.getCpf().isBlank()) {
 			return new Cliente(null, new CPF(CPF.formatarCPF(clienteDto.getCpf())), clienteDto.getNome());
 		} else if(clienteDto.getCnpj() != null) {
 			return new Cliente(null, clienteDto.getCnpj(), clienteDto.getNome());

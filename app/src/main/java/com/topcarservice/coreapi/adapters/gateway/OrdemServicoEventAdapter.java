@@ -6,7 +6,7 @@ import com.topcarservice.coreapi.adapters.controllers.dto.OrdemServicoRetornoDTO
 import com.topcarservice.coreapi.adapters.controllers.mappers.OrdemServicoMapper;
 import com.topcarservice.coreapi.domain.entities.OrdemServico;
 import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoOutputEventPort;
-import com.topcarservice.coreapi.infra.kafka.OrdemServicoAtualizadaProducer;
+import com.topcarservice.coreapi.infra.kafka.producer.OrdemServicoAtualizadaProducer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

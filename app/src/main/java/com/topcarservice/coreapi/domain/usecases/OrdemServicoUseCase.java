@@ -54,7 +54,7 @@ public class OrdemServicoUseCase {
 		return outputDBPort.findAll();
 	}
 
-	public void atualizar(OrdemServico ordemServico, String status) {		
+	public void atualizar(OrdemServico ordemServico, String status) throws Exception {		
 		
 		ordemServico.setStatus(StatusOrdemServico.fromDescricao(status));
 		cadastrar(ordemServico);		
@@ -72,7 +72,7 @@ public class OrdemServicoUseCase {
 	}
 
 	public OrdemServico incluirPecaInsumo(OrdemServico ordemServico, PecaInsumo pecaInsumo,
-			Integer quantidade) {
+			Integer quantidade) throws Exception {
 		
 		var pecaInsumoSolicitado = ordemServico.incluirPecasInsumos(pecaInsumo, quantidade);
 		
@@ -81,7 +81,7 @@ public class OrdemServicoUseCase {
 		return verificaStatus(ordemServico);
 	}
 
-	public OrdemServico incluirServico(OrdemServico ordemServico, Servico servico) {
+	public OrdemServico incluirServico(OrdemServico ordemServico, Servico servico) throws Exception {
 		
 		var servicoSolicitado = ordemServico.incluirServico(servico);
 		
@@ -90,7 +90,7 @@ public class OrdemServicoUseCase {
 		return verificaStatus(ordemServico);
 	}
 	
-	private OrdemServico verificaStatus(OrdemServico ordemServico) {
+	private OrdemServico verificaStatus(OrdemServico ordemServico) throws Exception {
 		
 		if(ordemServico.getStatus() != StatusOrdemServico.EM_DIAGNOSTICO) {
 			atualizar(ordemServico, StatusOrdemServico.EM_DIAGNOSTICO.getDescricao());

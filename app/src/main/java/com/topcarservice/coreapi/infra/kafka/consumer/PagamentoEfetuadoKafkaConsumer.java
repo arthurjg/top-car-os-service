@@ -1,4 +1,4 @@
-package com.topcarservice.coreapi.infra.kafka;
+package com.topcarservice.coreapi.infra.kafka.consumer;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,12 @@ public class PagamentoEfetuadoKafkaConsumer {
 		
 		OrdemServico ordemServico = ordemServicoUseCase.buscar(pagamentoDTO.getCodigoOrdemServico() );
 		
-		ordemServicoUseCase.atualizar(ordemServico, StatusOrdemServico.ENTREGUE.getDescricao());			
+		try {
+			ordemServicoUseCase.atualizar(ordemServico, StatusOrdemServico.ENTREGUE.getDescricao());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			
 		
 		log.info("Ordem de serviço atualizada para status: {}.", StatusOrdemServico.ENTREGUE.getDescricao());	
 		
