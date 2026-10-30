@@ -29,8 +29,7 @@ public class OrdemServicoAtualizadaKafkaConsumer {
 		
 		try {
 			ordemServicoUseCase.atualizar(ordemServico, StatusOrdemServico.FINALIZADA.getDescricao());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}			
 		

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Builder
@@ -14,7 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrdemServicoOrcamentoDTO {
 	
+	@Setter
 	Long codigoOrdemServico;	
+	
 	String cliente;
 	List<OrcamentoItemDTO> itens;	
 	String dataOrcamento;	
