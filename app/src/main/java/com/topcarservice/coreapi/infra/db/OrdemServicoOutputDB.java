@@ -10,7 +10,6 @@ import com.topcarservice.coreapi.domain.usecases.ports.OrdemServicoOutputDBPort;
 import com.topcarservice.coreapi.infra.db.mappers.OrdemServicoDBMapper;
 import com.topcarservice.coreapi.infra.db.repositories.OrdemServicoRepository;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -25,14 +24,14 @@ public class OrdemServicoOutputDB implements OrdemServicoOutputDBPort {
 	public Optional<OrdemServico> findById(Long codigo) {		
 		
 		return ordemServicoRepository.findById(codigo)
-				.map(ordemServicoDBMapper::mapToAggregate);
+				.map(ordemServicoDBMapper::mapTo);
 	}
 	
 	@Override	
 	public Optional<OrdemServico> findAggregateById(Long codigo) {		
 		
 		return ordemServicoRepository.findById(codigo)
-				.map(ordemServicoDBMapper::mapTo);
+				.map(ordemServicoDBMapper::mapToAggregate);
 	}
 
 	@Override

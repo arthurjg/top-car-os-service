@@ -1,7 +1,5 @@
 package com.topcarservice.coreapi.infra.db.mappers;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.topcarservice.coreapi.domain.entities.CPF;
@@ -10,9 +8,6 @@ import com.topcarservice.coreapi.infra.db.entities.ClienteDBEntity;
 
 @Component
 public class ClienteDBMapper {
-	
-	@Autowired
-	private ModelMapper objectMapper;
 
 	public ClienteDBEntity map(Cliente cliente) {			
 		return ClienteDBEntity.builder()

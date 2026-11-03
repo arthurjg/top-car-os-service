@@ -52,5 +52,15 @@ class ServicoUseCaseTest {
 		assertNotNull(servicoResult);
 		assertEquals(servico.getNome(), servicoResult.getNome());
 	}
+	
+	@Test
+	void testExcluir() {			
+		
+		Servico servico = new Servico(1L, "troca pneus", new BigDecimal(150.0), 60L);
+		
+		useCase.excluir(servico);
+		
+		verify(inputPort).delete(servico);
+	}
 
 }

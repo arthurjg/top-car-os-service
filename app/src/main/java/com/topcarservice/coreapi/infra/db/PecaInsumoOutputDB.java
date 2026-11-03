@@ -35,9 +35,7 @@ public class PecaInsumoOutputDB implements PecaInsumoOutputPort {
 				.stream()
 				.map(pecaInsumoDBMapper::mapTo)
 				.toList();
-	}
-	
-	
+	}	
 
 }
 

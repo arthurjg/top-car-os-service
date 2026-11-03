@@ -2,10 +2,12 @@ package com.topcarservice.coreapi.domain.usecases;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -57,6 +59,25 @@ class PecaInsumoUseCaseTest {
 		
 		assertNotNull(pecaInsumoResult);
 		assertEquals(pecaInsumo.getNome(), pecaInsumoResult.getNome());
+	}
+	
+	@Test
+	void testListar() {			
+		
+		when(outputPort.findAll()).thenReturn(List.of(pecaInsumo));
+		
+		List<PecaInsumo> pecaInsumoList = useCase.listar();
+		
+		assertNotNull(pecaInsumoList);
+		assertTrue(pecaInsumoList.size() == 1);
+	}
+	
+	@Test
+	void testExcluir() {			
+		
+		useCase.excluir(pecaInsumo);
+		
+		verify(inputPort).delete(pecaInsumo);
 	}
 
 }

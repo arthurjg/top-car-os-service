@@ -52,5 +52,14 @@ class ClienteUseCaseTest {
 		assertNotNull(clienteResult);
 		assertEquals(cliente.getNome(), clienteResult.getNome());
 	}
+	
+	@Test
+	void testExcluir() {
+		Cliente cliente = new Cliente(1L, "05197225996", "John Doe");		
+		
+		useCase.excluir(cliente);
+		
+		verify(inputPort).delete(cliente);
+	}
 
 }
