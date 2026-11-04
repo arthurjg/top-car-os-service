@@ -30,7 +30,7 @@ public class VeiculoController {
 	
 	VeiculoUseCase veiculoUseCase;	
 	
-	ClienteUseCase clienteUseCase;
+	//ClienteUseCase clienteUseCase;
 	
 	VeiculoMapper veiculoMapper;
 	
@@ -40,7 +40,7 @@ public class VeiculoController {
 		
 		Veiculo veiculo = veiculoMapper.map(veiculoDto);	
 		
-		Cliente cliente = clienteUseCase.carregar(veiculoDto.getCodigoCliente());
+		//Cliente cliente = clienteUseCase.carregar(veiculoDto.getCodigoCliente());
 		//veiculo.setCliente(cliente); TODO TEST ALTERAR
 		
 		veiculoUseCase.cadastrar(veiculo);		
@@ -52,7 +52,7 @@ public class VeiculoController {
 		
 		Veiculo veiculo = veiculoMapper.map(veiculoDto);	
 		
-		Cliente cliente = clienteUseCase.carregar(veiculoDto.getCodigoCliente());
+		//Cliente cliente = clienteUseCase.carregar(veiculoDto.getCodigoCliente());
 		//veiculo.setCliente(cliente); TODO TEST ALTERAR
 		
 		veiculoUseCase.cadastrar(veiculo);	

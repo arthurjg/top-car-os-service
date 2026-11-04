@@ -29,7 +29,7 @@ public class OrdemServicoAprovacaoDesfazerKafkaConsumer {
 		
 		log.info("Ordem Serviço aprovação desfazer recebida no tópico: {}.", ordemServicoDTO.getCodigo());	
 		
-		OrdemServicoOrcamentoDTO ordemServicoOrcamentoDTO = new OrdemServicoOrcamentoDTO();
+		var ordemServicoOrcamentoDTO = new OrdemServicoOrcamentoDTO();
 		ordemServicoOrcamentoDTO.setCodigoOrdemServico(ordemServicoDTO.getCodigo());
 		
 		OrdemServico ordemServico = ordemServicoUseCase.buscar(ordemServicoDTO.getCodigo());

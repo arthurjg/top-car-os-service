@@ -33,7 +33,7 @@ public class OrcamentoGeradoKafkaConsumer {
 		try {					
 			
 			if(ordemServicoOrcamentoDTO.getCodigoOrdemServico() % 2 != 0 ) {
-				throw new Exception("Erro ao atualizar Ordem de Serviço [cpf inexistente] "); 
+				throw new Exception("Erro ao atualizar Ordem de Serviço [nao par] "); 
 			}
 			
 			ordemServicoUseCase.atualizar(ordemServico, StatusOrdemServico.AGUARDANDO_APROVACAO.getDescricao());

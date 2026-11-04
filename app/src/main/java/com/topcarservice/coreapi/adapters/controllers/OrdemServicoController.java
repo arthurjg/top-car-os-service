@@ -91,10 +91,7 @@ public class OrdemServicoController {
 		} catch (IllegalStateException e) {			
 			log.error("Erro ao incluir serviço na ordem de serviço: {}", e.getMessage());
 			return ResponseEntity.badRequest().build();
-		} catch (Exception e) {
-			log.error("Erro ao incluir serviço na ordem de serviço: {}", e.getMessage());
-			return ResponseEntity.internalServerError().build();
-		}				
+		}		
 	}
 	
 	@PostMapping("/{id}/pecas-insumos")
@@ -118,10 +115,7 @@ public class OrdemServicoController {
 		} catch (IllegalStateException e) {			
 			log.error("Erro ao incluir peça/insumo na ordem de serviço: {}", e.getMessage());
 			return ResponseEntity.badRequest().build();
-		} catch (Exception e) {
-			log.error("Erro ao incluir peça/insumo na ordem de serviço: {}", e.getMessage());
-			return ResponseEntity.internalServerError().build();
-		}			
+		} 		
 	}
 	
 	@PutMapping("/{id}")
@@ -144,10 +138,7 @@ public class OrdemServicoController {
 		} catch (IllegalStateException e) {			
 			log.error("Erro ao atualizar status da ordem de serviço: {}", e.getMessage());
 			return ResponseEntity.badRequest().build();
-		} catch (Exception e) {
-			log.error("Erro ao atualizar status da ordem de serviço: {}", e.getMessage());
-			return ResponseEntity.internalServerError().build();
-		}	
+		} 
 	}	
 	
 	@PutMapping("/{id}/diagnostico")
@@ -192,10 +183,7 @@ public class OrdemServicoController {
 		} catch (IllegalStateException e) {			
 			log.error("Erro ao aprovar a ordem de serviço: {}", e.getMessage());
 			return ResponseEntity.badRequest().build();
-		} catch (Exception e) {
-			log.error("Erro ao aprovar a ordem de serviço: {}", e.getMessage());
-			return ResponseEntity.internalServerError().build();
-		}	
+		}
 	}	
 
 }

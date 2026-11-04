@@ -104,7 +104,7 @@ public class OrdemServico {
 		}
 		validarInclusaoItemOuServico();
 		var pecaInsumoSolicitado = new PecaInsumoSolicitado(pecasInsumo, quantidade);
-		this.pecasInsumos.add(new PecaInsumoSolicitado(pecasInsumo, quantidade));
+		this.pecasInsumos.add(pecaInsumoSolicitado);
 		return pecaInsumoSolicitado;
 	}
 
