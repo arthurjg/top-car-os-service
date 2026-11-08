@@ -1,0 +1,127 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:  
+  push:
+    branches: [ "release/*" ]
+
+permissions:
+  contents: read
+
+env:
+  AWS_REGION: us-east-1                   
+  ECR_REPOSITORY: top-car-service-app
+  EKS_CLUSTER_NAME: top-car-eks-cluster
+  TERRAFORM_WORKING_DIR: infra
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} DISABILITADO!!!!
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest    
+
+    steps:    
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn -B package --file app/pom.xml
+    
+    - uses: actions/checkout@v4    
+    - name: Build the Docker image
+      run: |
+        mvn -B package --file app/pom.xml
+        docker build . --file Dockerfile --tag top-car-service-app:$(date +%s)
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          #aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} DISABILITADO!!!!
+          aws-region: ${{ env.AWS_REGION }}
+            
+    - uses: aws-actions/amazon-ecr-login@v2
+      id: login-ecr
+    
+    - name: Build and Push docker image to Amazon ECR
+      run: |
+        docker build -t ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest .
+        docker push -a ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}   
+        
+  terraform:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.TERRAFORM_WORKING_DIR }}
+
+    steps:
+        # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v4
+
+        # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+      - name: Terraform Init
+        run: terraform init
+
+      # Checks that all Terraform configuration files adhere to a canonical format
+      - name: Terraform Format
+        run: terraform fmt -check
+        continue-on-error: true
+
+      # Generates an execution plan for Terraform
+      - name: Terraform Plan
+        run: terraform plan -input=false
+
+      # On push to "main", build or change infrastructure according to Terraform configuration files
+      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+      - name: Terraform Apply        
+        run: terraform apply -auto-approve -input=false
+
+  deploy:
+      
+    needs: [build, terraform]
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          #ws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} DISABILITADO!!!!
+          aws-region: ${{ env.AWS_REGION }}
+      
+    - name: Update kubeconfig and deploy to EKS
+      run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+
+    - name: Deploy to EKS
+      run: |
+        kubectl apply -f k8s/configmap.yaml
+        kubectl apply -f k8s/secrets.yaml    
+        kubectl apply -f k8s/deployment-db.yaml
+        kubectl apply -f k8s/service-db.yaml
+        kubectl apply -f k8s/deployment-app.yaml
+        kubectl apply -f k8s/service-app.yaml
+        kubectl apply -f k8s/hpa.yaml
+          
