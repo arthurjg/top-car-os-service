@@ -12,9 +12,6 @@ RUN mkdir -p /opt/datadog/ && \
 
 USER spring:spring
 
-#RUN chown -R spring:spring /app
-#RUN chmod -R 774 /app
-
 ARG JAR_FILE=app/target/*jar
 COPY ${JAR_FILE} app.jar
 

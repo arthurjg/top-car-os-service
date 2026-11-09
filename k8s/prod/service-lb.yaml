@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: top-car-app-lb-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: top-car-service-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8082
