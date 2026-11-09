@@ -6,11 +6,12 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CD with Maven
+name: Java CI/CD with Maven - Develop
 
 on:  
   pull_request:
     branches: [ "develop" ]
+    types: [closed]
 
 permissions:
   contents: read
