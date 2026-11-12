@@ -9,7 +9,7 @@
 name: Java CI/CD with Maven - Homolog
 
 on:  
-  pull_request:
+  pull_request_target:
     branches: [ "release/*" ]
     types: [closed]
 
