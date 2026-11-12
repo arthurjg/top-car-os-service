@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI/CD with Maven - Homolog
+name: Java CI/CD with Maven - Prod
 
 on:  
   pull_request:
@@ -30,6 +30,7 @@ jobs:
     name: Build and Analyze
 
     runs-on: ubuntu-latest    
+    if: github.event.pull_request.merged == true
 
     steps:    
     - uses: actions/checkout@v4
@@ -84,6 +85,7 @@ jobs:
 
   terraform:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
 
     defaults:
       run:
