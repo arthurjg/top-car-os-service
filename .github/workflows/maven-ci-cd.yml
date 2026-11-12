@@ -10,8 +10,10 @@ name: Java CI/CD with Maven - Develop
 
 on:  
   pull_request_target:
-    branches: [ "develop" ]
-    types: [closed]
+    branches:
+      - 'develop'    
+    types: 
+      - closed
 
 permissions:
   contents: read

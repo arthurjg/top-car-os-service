@@ -10,8 +10,10 @@ name: Java CI/CD with Maven - Prod
 
 on:  
   pull_request_target:
-    branches: [ "main" ]
-    types: [closed]
+    branches:
+      - 'main'    
+    types: 
+      - closed
 
 permissions:
   contents: read
