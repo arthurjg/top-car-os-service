@@ -31,8 +31,7 @@ jobs:
   build:
     name: Build and Analyze
 
-    runs-on: ubuntu-latest    
-    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
 
     steps:    
     
@@ -94,7 +93,6 @@ jobs:
 
   terraform:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
 
     defaults:
       run:
