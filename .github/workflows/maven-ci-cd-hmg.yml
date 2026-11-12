@@ -9,9 +9,9 @@
 name: Java CI/CD with Maven - Homolog
 
 on:  
-  pull_request_target:
-    branches: [ "release/*" ]
-    types: [closed]
+  push:
+    branches:
+      - 'release/*'    
 
 permissions:
   contents: read
