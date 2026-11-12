@@ -9,7 +9,7 @@
 name: Java CI/CD with Maven - Develop
 
 on:  
-  pull_request:
+  pull_request_target:
     branches: [ "develop" ]
     types: [closed]
 
