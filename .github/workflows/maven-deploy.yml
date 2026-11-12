@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven - Homolog
+name: Java CI with Maven - Homolog DEs
 
 on:  
   pull_request:
