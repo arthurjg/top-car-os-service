@@ -9,11 +9,11 @@
 name: Java CI/CD with Maven - Prod
 
 on:  
-  pull_request:
+  push:
     branches:
-      - 'main'    
-    types: 
-      - closed
+      - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
 
 permissions:
   contents: read
