@@ -17,7 +17,7 @@ permissions:
 
 env:
   AWS_REGION: us-east-1                   
-  ECR_REPOSITORY: top-car-service-app
+  ECR_REPOSITORY: top-car-service/top-car-os-service
   EKS_CLUSTER_NAME: top-car-eks
 
 jobs:
@@ -59,7 +59,7 @@ jobs:
     - name: Build the Docker image
       run: |
         mvn -B package --file app/pom.xml
-        docker build . --file Dockerfile --tag top-car-os-service:$(date +%s)
+        docker build . --file Dockerfile --build-arg ENV=prod --tag top-car-os-service:$(date +%s)
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
