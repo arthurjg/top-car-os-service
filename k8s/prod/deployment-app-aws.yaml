@@ -16,7 +16,7 @@ spec:
     spec:
       containers:      
       - name: top-car-service
-        image: 711648264774.dkr.ecr.us-east-1.amazonaws.com/top-car-service-app:latest               
+        image: 711648264774.dkr.ecr.us-east-1.amazonaws.com/top-car-service/top-car-os-service:latest               
         ports:
         - containerPort: 8082
         env:        
