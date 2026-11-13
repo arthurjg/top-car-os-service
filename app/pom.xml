@@ -22,14 +22,14 @@
 		<java.version>21</java.version>
 		<sonar.organization>arthurjg</sonar.organization>
 		<sonar.coverage.exclusions>        
-			**/CoreApiApplication.class,
-			**/UsuarioLoader.class,	
-			**/Usuario.class,						
-			**/config/*.class,
-			**/security/*.class,
-			**/entities/*.class,
-			**/mappers/*.class,
-			**/dto/*.class
+			**/CoreApiApplication.java,
+			**/UsuarioLoader.java,
+			**/Usuario.java,
+			**/config/**,
+			**/security/**,
+			**/entities/**,
+			**/mappers/**,
+			**/dto/**
     	</sonar.coverage.exclusions>
 	</properties>
 	
