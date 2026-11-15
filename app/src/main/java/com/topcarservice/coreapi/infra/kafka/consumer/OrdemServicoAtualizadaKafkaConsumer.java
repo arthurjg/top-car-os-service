@@ -21,7 +21,7 @@ public class OrdemServicoAtualizadaKafkaConsumer {
 	private final OrdemServicoUseCase ordemServicoUseCase;	
 	
 	@KafkaListener(topics = ORDEM_SERVICO_FINALIZADA_TOPIC, groupId = "${spring.kafka.consumer.group-id}")
-	public void recebeEventoOSAprovada(OrdemServicoRetornoDTO ordemServicoDTO) {
+	public void recebeEventoOSAtualizada(OrdemServicoRetornoDTO ordemServicoDTO) {
 		
 		log.info("Ordem Serviço finalizada recebida no tópico: {}.", ordemServicoDTO.getCodigo());		
 		

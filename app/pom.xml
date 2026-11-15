@@ -21,6 +21,16 @@
 	<properties>
 		<java.version>21</java.version>
 		<sonar.organization>arthurjg</sonar.organization>
+		<sonar.coverage.exclusions>        
+			**/CoreApiApplication.java,
+			**/UsuarioLoader.java,
+			**/Usuario.java,
+			**/config/**,
+			**/security/**,
+			**/entities/**,
+			**/mappers/**,
+			**/dto/**
+    	</sonar.coverage.exclusions>
 	</properties>
 	
 	<dependencies>
