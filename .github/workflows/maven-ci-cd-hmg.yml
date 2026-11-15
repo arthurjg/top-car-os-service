@@ -36,8 +36,7 @@ jobs:
     
     - name: Checkout source code
       uses: actions/checkout@v4
-      with:
-          ref: main
+      with:          
           fetch-depth: 0
 
     - name: Set up JDK 21
