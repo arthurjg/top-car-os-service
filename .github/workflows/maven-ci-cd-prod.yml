@@ -142,17 +142,23 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       
+    #- name: Update kubeconfig and deploy to EKS
+    #  run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+
     - name: Update kubeconfig and deploy to EKS
-      run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+      run: echo "Updating kubeconfig and deploying to EKS"
+
+    #- name: Deploy to EKS
+    #  run: |
+    #    kubectl apply -f k8s/configmap.yaml
+    #    kubectl apply -f k8s/secrets.yaml    
+    #    kubectl apply -f k8s/deployment-db.yaml
+    #    kubectl apply -f k8s/service-db.yaml
+    #    kubectl apply -f k8s/deployment-app.yaml
+    #    kubectl apply -f k8s/service-app.yaml
+    #    kubectl apply -f k8s/hpa.yaml
 
     - name: Deploy to EKS
-      run: |
-        kubectl apply -f k8s/configmap.yaml
-        kubectl apply -f k8s/secrets.yaml    
-        kubectl apply -f k8s/deployment-db.yaml
-        kubectl apply -f k8s/service-db.yaml
-        kubectl apply -f k8s/deployment-app.yaml
-        kubectl apply -f k8s/service-app.yaml
-        kubectl apply -f k8s/hpa.yaml
+      run: echo "Deploing to EKS"
         
           
