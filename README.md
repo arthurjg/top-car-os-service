@@ -1,6 +1,3 @@
-# top-car-os-service
-back-end do sistema da oficina, com foco em gestão de ordens de serviço, clientes e peças.
-
 # Top Car OS Service API 
 
 microserviço/API de gestão de ordens de serviço, clientes e peças da oficina top-car-service, com foco em gestão de ordens de serviço.
