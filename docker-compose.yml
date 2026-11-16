@@ -24,24 +24,6 @@ services:
       start_period: 5s
     networks:
       - local
-      
-  top-car-os-service-api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        ENV: dev
-    image: top-car-os-service-api:1.4.0
-    container_name: top-car-os-service-api
-    restart: unless-stopped
-    ports:
-      - "8082:8082"    
-    depends_on:
-      - db-top-car-postgres
-    networks:
-      - local
-    environment:
-      - ENV=dev
 
   kafka:
     image: apache/kafka:latest
@@ -61,6 +43,53 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      
+  top-car-os-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ENV: dev
+    image: top-car-os-service:1.4.0
+    container_name: top-car-os-service
+    restart: unless-stopped
+    ports:
+      - "8082:8082"    
+    depends_on:
+      - db-top-car-postgres
+      - kafka
+    networks:
+      - local
+    environment:
+      - ENV=dev
+
+  top-car-billing-service:    
+    image: top-car-billing-service:1.4.0
+    container_name: top-car-billing-service
+    restart: unless-stopped
+    ports:
+      - "8083:8083"    
+    depends_on:
+      - db-top-car-postgres
+      - kafka
+    networks:
+      - local
+    environment:
+      - ENV=dev
+
+  top-car-exec-service:    
+    image: top-car-exec-service:1.4.0
+    container_name: top-car-exec-service
+    restart: unless-stopped
+    ports:
+      - "8084:8084"    
+    depends_on:
+      - db-top-car-postgres
+      - kafka
+    networks:
+      - local
+    environment:
+      - ENV=dev  
 
 volumes:
   postgres_data:
