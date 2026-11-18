@@ -67,7 +67,7 @@ class OrdemServicoUseCaseTest {
 		
 		long codigo = 1L;		
 		
-		when(outputPort.findById(codigo)).thenReturn(Optional.of(ordemServico));
+		when(outputPort.findAggregateById(codigo)).thenReturn(Optional.of(ordemServico));
 		
 		OrdemServico ordemServicoResult = useCase.carregar(codigo);
 		
@@ -80,7 +80,7 @@ class OrdemServicoUseCaseTest {
 		
 		long codigo = 1L;		
 		
-		when(outputPort.findAggregateById(codigo)).thenReturn(Optional.of(ordemServico));
+		when(outputPort.findById(codigo)).thenReturn(Optional.of(ordemServico));
 		
 		OrdemServico ordemServicoResult = useCase.buscar(codigo);
 		
