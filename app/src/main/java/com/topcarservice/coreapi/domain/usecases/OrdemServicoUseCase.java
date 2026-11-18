@@ -36,13 +36,13 @@ public class OrdemServicoUseCase {
 
 	public OrdemServico carregar(Long codigo) {
 		
-		return outputDBPort.findById(codigo)
+		return outputDBPort.findAggregateById(codigo)
 				.orElseThrow(() -> new IllegalArgumentException("OrdemServico não encontrada"));
 	}
 	
 	public OrdemServico buscar(Long codigo) {
 		
-		return outputDBPort.findAggregateById(codigo)
+		return outputDBPort.findById(codigo)
 				.orElseThrow(() -> new IllegalArgumentException("OrdemServico não encontrada"));
 	}
 
